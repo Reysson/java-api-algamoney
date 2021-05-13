@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Categoria implements Serializable {
@@ -13,6 +15,9 @@ public class Categoria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
+    
+    @NotBlank(message = "O nome não pode ser vazio")
+    @Size(min = 3,max = 20)
     private String nome;
 
     public Integer getCodigo() {

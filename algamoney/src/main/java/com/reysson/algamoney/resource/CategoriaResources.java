@@ -4,6 +4,7 @@ import com.reysson.algamoney.model.Categoria;
 import com.reysson.algamoney.repository.CategoriaRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ public class CategoriaResources {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Categoria salvar(@RequestBody Categoria categoria) {
+    public Categoria salvar(@Valid @RequestBody Categoria categoria) {
         return categoriaRepository.save(categoria);
 
     }
