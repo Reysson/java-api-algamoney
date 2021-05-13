@@ -3,8 +3,11 @@ package com.reysson.algamoney.resource;
 import com.reysson.algamoney.model.Pessoa;
 import com.reysson.algamoney.repository.PessoaRepository;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +21,11 @@ public class PessoaResources {
     @GetMapping
     public List<Pessoa> listarTodos(){
         return pessoaRepository.findAll();
+    }
+    
+    @PostMapping
+    public Pessoa salvar(@Valid @RequestBody Pessoa pessoa){
+        return pessoaRepository.save(pessoa);
     }
     
 }
