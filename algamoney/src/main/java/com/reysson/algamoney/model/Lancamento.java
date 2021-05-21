@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Lancamento implements Serializable {
@@ -22,28 +23,35 @@ public class Lancamento implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
     
+    @NotNull
     private String descricao;
     
+    @NotNull
     @JsonFormat(pattern = "dd/MM/yyy")
     @Column(name = "data_vencimento")
     private LocalDate dataVencimento;
+    
     
     @JsonFormat(pattern = "dd/MM/yyy")
     @Column(name = "data_pagamento")
     private LocalDate dataPagamento;
     
+    @NotNull
     private Float valor;
     
     private String observacao;
     
+    @NotNull
     @Enumerated(EnumType.STRING)
     private TipoLancamento tipo;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "categoria_codigo")
     private Categoria categoria;
     
     @ManyToOne
+    @NotNull
     @JoinColumn(name = "pessoa_codigo")
     private Pessoa pessoa;
 

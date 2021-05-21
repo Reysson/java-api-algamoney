@@ -4,6 +4,7 @@ import com.reysson.algamoney.model.Lancamento;
 import com.reysson.algamoney.repository.LancamentoRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -40,7 +41,7 @@ public class LancamentoResources {
     
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Lancamento salvar(@RequestBody Lancamento lancamento){
+    public Lancamento salvar(@Valid @RequestBody Lancamento lancamento){
         return lancamentoRepository.save(lancamento);
     }
 
