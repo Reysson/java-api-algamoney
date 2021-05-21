@@ -11,13 +11,13 @@ import javax.validation.constraints.Size;
 
 @Entity
 public class Categoria implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer codigo;
-    
+
     @NotBlank(message = "O nome não pode ser vazio")
-    @Size(min = 3,max = 20)
+    @Size(min = 3, max = 20)
     private String nome;
 
     public Integer getCodigo() {
@@ -35,6 +35,7 @@ public class Categoria implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
 
     @Override
     public int hashCode() {
@@ -60,8 +61,5 @@ public class Categoria implements Serializable {
         }
         return true;
     }
-    
-    
-    
-    
+
 }
