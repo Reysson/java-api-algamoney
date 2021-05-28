@@ -2,6 +2,7 @@ package com.reysson.algamoney.resource;
 
 import com.reysson.algamoney.model.Lancamento;
 import com.reysson.algamoney.repository.LancamentoRepository;
+import com.reysson.algamoney.repository.filter.LancamentoFilter;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -25,8 +26,8 @@ public class LancamentoResources {
     private LancamentoRepository lancamentoRepository;
 
     @GetMapping
-    public List<Lancamento> buscarTodos() {
-        return lancamentoRepository.findAll();
+    public List<Lancamento> pesquisar(LancamentoFilter filter) {
+        return lancamentoRepository.filtrar(filter);
     }
 
     @GetMapping("/{id}")
