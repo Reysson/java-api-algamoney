@@ -20,6 +20,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 
     @Override
     public boolean supports(MethodParameter mp, Class<? extends HttpMessageConverter<?>> type) {
+        
         return mp.getMethod().getName().equals("postAccessToken");
     }
 
@@ -44,7 +45,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
     private void adicionarRefreshTokenNoCookie(String refreshToken, HttpServletRequest request,
             HttpServletResponse response) {
         
-        Cookie cookie = new Cookie("refresh_token",refreshToken);
+        Cookie cookie = new Cookie("refreshToken",refreshToken);
         cookie.setHttpOnly(true); 
         cookie.setSecure(false); //Mudar em produção
         cookie.setPath(request.getContextPath() + "/oauth/token");
