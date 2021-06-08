@@ -3,7 +3,7 @@ package com.reysson.algamoney.resource;
 import com.reysson.algamoney.model.Lancamento;
 import com.reysson.algamoney.repository.LancamentoRepository;
 import com.reysson.algamoney.repository.filter.LancamentoFilter;
-import java.util.List;
+import com.reysson.algamoney.repository.projecao.LancamentoResumo;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +30,11 @@ public class LancamentoResources {
     @GetMapping
     public Page<Lancamento> pesquisar(LancamentoFilter filter, Pageable pageable) {
         return lancamentoRepository.filtrar(filter,pageable);
+    }
+    
+    @GetMapping(params = "resumo")
+    public Page<LancamentoResumo> resumir(LancamentoFilter filter, Pageable pageable) {
+        return lancamentoRepository.buscar(filter,pageable);
     }
 
     @GetMapping("/{id}")
