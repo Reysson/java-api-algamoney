@@ -1,6 +1,7 @@
 package com.reysson.algamoney.resource;
 
 import com.reysson.algamoney.dto.LancamentoEstatiscaCategoria;
+import com.reysson.algamoney.dto.LancamentoEstatiscaDia;
 import com.reysson.algamoney.model.Lancamento;
 import com.reysson.algamoney.repository.LancamentoRepository;
 import com.reysson.algamoney.repository.filter.LancamentoFilter;
@@ -35,6 +36,12 @@ public class LancamentoResources {
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')")
     public List<LancamentoEstatiscaCategoria> porCategoria(){
        return this.lancamentoRepository.porCategoria(LocalDate.now());
+    }
+    
+    @GetMapping("/estatistica/por-dia")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')")
+    public List<LancamentoEstatiscaDia> porDia(){
+       return this.lancamentoRepository.porDia(LocalDate.now());
     }
 
     @GetMapping

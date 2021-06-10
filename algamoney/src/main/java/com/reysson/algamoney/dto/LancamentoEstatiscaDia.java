@@ -1,7 +1,6 @@
 package com.reysson.algamoney.dto;
 
 import com.reysson.algamoney.model.TipoLancamento;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,9 +11,9 @@ public class LancamentoEstatiscaDia {
     
     private LocalDate dia;
     
-    private BigDecimal total;
+    private Double total;
 
-    public LancamentoEstatiscaDia(TipoLancamento tipo, LocalDate dia, BigDecimal total) {
+    public LancamentoEstatiscaDia(TipoLancamento tipo, LocalDate dia, Double total) {
         this.tipo = tipo;
         this.dia = dia;
         this.total = total;
@@ -36,11 +35,11 @@ public class LancamentoEstatiscaDia {
         this.dia = dia;
     }
 
-    public BigDecimal getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(BigDecimal total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

@@ -1,6 +1,7 @@
 package com.reysson.algamoney.repository.implementacao;
 
 import com.reysson.algamoney.dto.LancamentoEstatiscaCategoria;
+import com.reysson.algamoney.dto.LancamentoEstatiscaDia;
 import com.reysson.algamoney.model.Lancamento;
 import com.reysson.algamoney.repository.filter.LancamentoFilter;
 import com.reysson.algamoney.repository.projecao.LancamentoResumo;
@@ -60,6 +61,38 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         adicionarRestricoesDePaginacao(query, pageable);
 
         return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
+    }
+
+    @Override
+    public List<LancamentoEstatiscaDia> porDia(LocalDate mesReferencia) {
+        CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
+
+        CriteriaQuery<LancamentoEstatiscaDia> criteriaQuery = criteriaBuilder.
+                createQuery(LancamentoEstatiscaDia.class);
+
+        Root<Lancamento> root = criteriaQuery.from(Lancamento.class);
+
+        criteriaQuery.select(criteriaBuilder.construct(LancamentoEstatiscaDia.class,
+                root.get("tipo"),
+                root.get("dataVencimento"),
+                criteriaBuilder.sum(root.get("valor"))));
+
+        LocalDate primeiroDia = mesReferencia.withDayOfMonth(1);
+        LocalDate ultimoDia = mesReferencia.withDayOfMonth(mesReferencia.lengthOfMonth());
+
+        criteriaQuery.where(
+                criteriaBuilder.greaterThanOrEqualTo(root.get("dataVencimento"),
+                        primeiroDia),
+                criteriaBuilder.lessThanOrEqualTo(root.get("dataVencimento"),
+                        ultimoDia));
+
+        criteriaQuery.groupBy(root.get("tipo"),
+                root.get("dataVencimento"));
+
+        TypedQuery<LancamentoEstatiscaDia> typedQuery = manager
+                .createQuery(criteriaQuery);
+
+        return typedQuery.getResultList();
     }
 
     @Override
