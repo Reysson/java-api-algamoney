@@ -1,7 +1,7 @@
 
 package com.reysson.algamoney.model;
 
-enum TipoLancamento {
+public enum TipoLancamento {
     RECEITA,
     DESPESA
 }

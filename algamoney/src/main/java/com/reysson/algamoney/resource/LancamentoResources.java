@@ -1,9 +1,12 @@
 package com.reysson.algamoney.resource;
 
+import com.reysson.algamoney.dto.LancamentoEstatiscaCategoria;
 import com.reysson.algamoney.model.Lancamento;
 import com.reysson.algamoney.repository.LancamentoRepository;
 import com.reysson.algamoney.repository.filter.LancamentoFilter;
 import com.reysson.algamoney.repository.projecao.LancamentoResumo;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,12 @@ public class LancamentoResources {
 
     @Autowired
     private LancamentoRepository lancamentoRepository;
+    
+    @GetMapping("/estatistica/por-categoria")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')")
+    public List<LancamentoEstatiscaCategoria> porCategoria(){
+       return this.lancamentoRepository.porCategoria(LocalDate.now());
+    }
 
     @GetMapping
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO')")
